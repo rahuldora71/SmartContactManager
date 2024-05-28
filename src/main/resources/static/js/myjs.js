@@ -1,0 +1,1 @@
+console.log("THis is script file of smart contact manager site");

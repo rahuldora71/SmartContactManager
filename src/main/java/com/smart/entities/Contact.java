@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int cId;
 	private String name;
 	private String secondName;
 	private String work;
@@ -25,10 +25,10 @@ public class Contact {
 	private User user;
 	
 	
-	public Contact(int id, String name, String secondName, String work, String email, String phone, String image,
+	public Contact(int cId, String name, String secondName, String work, String email, String phone, String image,
 			String description, User user) {
 		super();
-		this.id = id;
+		this.cId = cId;
 		this.name = name;
 		this.secondName = secondName;
 		this.work = work;
@@ -44,11 +44,12 @@ public class Contact {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public int getId() {
-		return id;
+	
+	public int getcId() {
+		return cId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setcId(int cId) {
+		this.cId = cId;
 	}
 	public String getName() {
 		return name;
@@ -92,10 +93,10 @@ public class Contact {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Contact(int id, String name, String secondName, String work, String email, String phone, String image,
+	public Contact(int cId, String name, String secondName, String work, String email, String phone, String image,
 			String description) {
 		super();
-		this.id = id;
+		this.cId = cId;
 		this.name = name;
 		this.secondName = secondName;
 		this.work = work;
