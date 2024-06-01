@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.smart</groupId>
-	<artifactId>AmartContactManager</artifactId>
+	<artifactId>SmartContactManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AmartContactManager</name>
+	<name>SmartContactManager</name>
 	<description>Spring Boot project Smart Contact Manager</description>
 	<properties>
 		<java.version>21</java.version>

@@ -1,5 +1,9 @@
 body{
 	background: #e2e2e2 !important;
+	margin: 0;
+  padding: 0;
+  
+  height: 100vh;
 }
 
 .bg-primary{
@@ -17,3 +21,19 @@ body{
 	padding:20px;
 	background: #ffffff;
 }
+#login .container #login-row #login-column #login-box {
+	margin-top: 120px;
+	max-width: 600px;
+	height: 400px;
+	border: 1px solid #9C9C9C;
+	background-color: #ffffff;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+	padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+	margin-top: -85px;
+  }
+  #register-link{
+	text-align: end;
+  }

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.smart.dao.UserRepository;
 import com.smart.entities.User;
 
-public class UserDetailsDerviceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;

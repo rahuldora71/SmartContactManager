@@ -1,7 +1,9 @@
 package com.smart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +23,13 @@ import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	
+	// public BCryptPasswordEncoder bCryptPasswordEncoder() {
+	// 	return new BCryptPasswordEncoder();
+	// }
 	@Autowired
 	private UserRepository userRepository;
 
@@ -79,9 +87,12 @@ public class HomeController {
 			
 			
 			
-			user.setRole("ROLE_USER");
+			user.setRole("USER");
 			user.setEnabled(true);
 			user.setImageUrl("default.png");
+			System.out.println("this is the password befor bcrypt password encoder : "+user.getPassword());
+			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+			System.out.println("this is the password after bcrypt password encoder : "+user.getPassword());
 			System.out.println("Agreement : " + agreement);
 //			System.out.println("User:::::"+user);
 			User save = this.userRepository.save(user);
@@ -105,5 +116,15 @@ public class HomeController {
 		}
 
 	}
+
+
+	//handler for custom login
+
+	@GetMapping("/login")
+	public String loginhandler(Model model) {
+		model.addAttribute("title", "Login-Smart Contact Manager");
+		return "login";
+	}
+	
 
 }

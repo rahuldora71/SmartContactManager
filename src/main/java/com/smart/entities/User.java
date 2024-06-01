@@ -24,14 +24,15 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotBlank(message = "Must enter your name!")
-	@Size(min = 2,max = 35,message = "only 2-35 charecters are allowed !")
+	@Size(min = 2,max = 50,message = "only 2-35 charecters are allowed !")
 	private String name;
 	@Column(unique = true)
 	@Email(message = "Enter your valid email !")
 	@NotBlank(message = "Enter your email !")
 	private String email;
 	@NotBlank(message = "Password Required!")
-	@Size(min = 6,max = 16,message = "Password Should be 6-16 letters")
+	// @Size(min = 6,max = 16,message = "Password Should be 6-16 letters")
+	@Column(length = 249)
 	private String password;
 	private String role;
 	private boolean enabled;
