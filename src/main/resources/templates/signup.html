@@ -11,17 +11,31 @@
 			<div class="row">
 				<div class="col-md-6 offset-md-3 ">
 					<div class="my-card mt-2">
-					
-					
-					<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+
+
+						<!--      message-->
+						<div th:if="${session.message}" class="container p-2">
+
+							<div class="alert  text-center" th:classappend="${session.message.type}" role="alert" >
+								<span th:text="${session.message.content}"></span>
+							</div>
+						</div>
+
+						<!--    OLd method-->
+						<!--    <th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+
+						<!--    New Method to remove session-->
+						<th:block th:text="${@sessionRemover.removeMessageFromSession()}"></th:block>
+
+						<!--<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
 					<p th:text="${session.message.content}"></p>
-					<!-- <th:block th:text="${#session.removeAttribute('message')}"></th:block> -->
-					</div> 
-					
-					<!-- <div th:if="${message != null}" th:classappend="${message.type}" class="alert" role="alert">
+					&lt;!&ndash; <th:block th:text="${#session.removeAttribute('message')}"></th:block> &ndash;&gt;
+					</div>
+						<th:block th:text="${@sessionRemover.removeMessageFromSession()}"></th:block>
+					&lt;!&ndash; <div th:if="${message != null}" th:classappend="${message.type}" class="alert" role="alert">
                             <p th:text="${message.content}"></p>
-                        </div> -->
-					
+                        </div> &ndash;&gt;
+					-->
 					
 					
 					<div class="text-center">
@@ -45,7 +59,7 @@
 								th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
 								>
 								<div th:each="e : ${#fields.errors('name')}" th:text="${e}"
-							id="validationServer03Feedback" class="invalid-feedback"></div>
+							 class="invalid-feedback"></div>
 								
 							</div>
 
@@ -67,7 +81,7 @@
 								th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
 								>
 								<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
-							id="validationServer03Feedback" class="invalid-feedback"></div>
+							 class="invalid-feedback"></div>
 								
 								
 							
@@ -88,7 +102,7 @@
 								th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
 								>
 								<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
-							id="validationServer03Feedback" class="invalid-feedback"></div>
+							 class="invalid-feedback"></div>
 								
 								
 							</div>

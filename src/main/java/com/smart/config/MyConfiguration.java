@@ -66,20 +66,39 @@ public class MyConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		//Configuration  urls which are allowed to access without login
 		http.authorizeHttpRequests(authorize->{
-			// authorize.requestMatchers("/admin/**").hasRole("ADMIN");
-			// authorize.requestMatchers("/user/**").hasRole("USER");
+			authorize.requestMatchers("/admin/**").hasAuthority("ADMIN");
+			authorize.requestMatchers("/user/**").hasAuthority("USER");
 			authorize.anyRequest().permitAll();
-		}); 
+		});  
 		//form default login 
 		// if we have to cahnde any thing relatrd to form login
+		
+		// http.formLogin(Customizer.withDefaults());
 		http.formLogin(formLogin->{
 			formLogin.loginPage("/login");
-			
+			formLogin.defaultSuccessUrl("/user/index");
 			formLogin.failureUrl("/login?error");
 			formLogin.usernameParameter("username");
-			formLogin.passwordParameter("password");});
+			formLogin.passwordParameter("password");
+		formLogin.permitAll();
+	});
 
 
+
+	http.csrf(crsf->{
+		crsf.disable();
+	});
+			//logout configuration
+			http.logout(logout->{
+				logout.logoutUrl("/logout");
+				logout.logoutSuccessUrl("/login?logout");
+				logout.invalidateHttpSession(true);
+				logout.deleteCookies("JSESSIONID");
+				logout.permitAll();
+			});
+
+			// http.logout(Customizer.withDefaults());
+			
 
 
 

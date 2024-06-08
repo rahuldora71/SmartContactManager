@@ -57,7 +57,7 @@ public class HomeController {
 
 		if (message != null) {
 			model.addAttribute("message", message);
-			session.removeAttribute("message");
+
 		}
 		model.addAttribute("user", new User());
 		return "signup";
@@ -125,6 +125,9 @@ public class HomeController {
 		model.addAttribute("title", "Login-Smart Contact Manager");
 		return "login";
 	}
+	//handler for custom logout
+
+	
 	
 
 }

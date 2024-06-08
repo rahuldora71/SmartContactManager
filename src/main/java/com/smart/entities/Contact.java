@@ -6,17 +6,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int cId;
+	@NotBlank(message = "Enter your name!")
 	private String name;
 	private String secondName;
 	private String work;
 	private String email;
-	
+	@NotBlank()
+	@Column(unique = true)
 	private String phone;
 	private String image;
 	@Column(length = 5000)
@@ -109,6 +112,20 @@ public class Contact {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
+
+	@Override
+	public String toString() {
+		return "Contact{" +
+				"cId=" + cId +
+				", name='" + name + '\'' +
+				", secondName='" + secondName + '\'' +
+				", work='" + work + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", image='" + image + '\'' +
+				", description='" + description + '\'' +
+				", user=" + user +
+				'}';
+	}
 }
