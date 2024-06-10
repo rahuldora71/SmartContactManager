@@ -107,3 +107,10 @@ body {
 	margin-left: 20%;
 
 }
+.profile_picture{
+	height: 30px;
+	width: 30px;
+	object-fit: cover;
+	border-radius: 50%;
+	border: 1px solid black;
+}

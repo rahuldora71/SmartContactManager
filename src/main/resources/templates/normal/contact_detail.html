@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8" />
+    <title>Contact Details</title>
+</head>
+<body>
+<section>
+    <div class="card">
+        <div th:if="${contact}" class="card-body ms-3 me-3">
+            <div class="container text-center">
+                <img style=" width: 200px; height: 200px;"  class="profile_picture"  th:src="@{'/images/'+${contact.image}}" alt="Profile picture">
+
+                <h2 class="m-3" th:text="${contact.name+' '+contact.secondName}"></h2>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">SCM<span th:text="${contact.cId}"></span></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Phone</th>
+                        <td><span th:text="${contact.phone}"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td><span th:text="${contact.email}"></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Work</th>
+                        <td><span th:text="${contact.work}"></span></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <div class="description">
+                    <p th:text="${contact.description}"></p>
+                </div>
+                <div class="container">
+                    <!-- Button trigger Delete modal -->
+                    <a class="btn btn-outline-danger m-3" href="" data-bs-toggle="modal" data-bs-target="#deleteModal" ><i class="fa-solid fa-trash-can"></i></a>
+
+                    <!-- Delete Modal -->
+
+                    <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete <span th:text="${contact.name+' '+contact.secondName}"></span></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure to delete this contact!
+                                </div>
+                                <div class="modal-footer">
+                                    <a href=""   >
+
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    </a>
+                                    <a href="" th:href="@{'/user/show-contacts/'+${contact.cId}+'/delete'}">
+
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+<!--                    <button class="btn btn-outline-primary m-3" th:href="@{'/user/update-contact/'+${contact.cId}}"><i class="fa-solid fa-pen-to-square"></i></button>-->
+
+<!--                 Update Button-->
+                    <form class="d-inline" th:action="@{'/user/update-contact/'+${contact.cId}}" method="post">
+                        <button class="btn btn-outline-primary m-3" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${contact}" class="card-body m-3">
+
+            <h3 class="text-center alert alert-danger fs-1">You don't have permission to see this contact</h3>
+
+            <div class=" text-center">
+
+                <a href="" th:href="@{'/user/show-contacts/0'}">
+                <button class=" btn btn-outline-primary m-5" >See Your Contacts</button>
+                </a>
+        </div>
+        </div>
+    </div>
+
+
+</section>
+</body>
+</html>
