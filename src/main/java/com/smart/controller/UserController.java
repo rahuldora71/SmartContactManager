@@ -129,7 +129,7 @@ public class UserController {
 		String userName = principal.getName();
 		User user = this.userRepository.getUserByUserName(userName);
 
-		int pageSize=3;
+		int pageSize=6;
 		// it have current page number and page size
 		Pageable pageable= PageRequest .of(page,pageSize);
 		Page<Contact> contact = this.contactRepository.findContactByUser(user.getId(),pageable);
@@ -236,6 +236,19 @@ public class UserController {
 		}
 
 		return "redirect:/user/"+contact.getcId()+"/contact";
+	}
+
+	//Profile Handler
+	@GetMapping("/profile")
+	public  String yourProfile(Model model, Principal principal) {
+		model.addAttribute("title", "Profile-Smart Contact Manager");
+
+		User user = this.userRepository.getUserByUserName(principal.getName());
+		model.addAttribute("user",user);
+
+
+
+		return "normal/profile";
 	}
 
 }

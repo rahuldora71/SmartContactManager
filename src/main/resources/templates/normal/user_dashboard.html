@@ -6,12 +6,25 @@
 </head>
 <body>
 	<section>
-		
-		<h1>Welcome You are a normal User</h1>
-		<h1>This is your private dashboard</h1>
-		<h1>User Name <span th:text="${user.name}"></span></h1>
-		<h1>User Email <span th:text="${user.role}"></span></h1>
+		<div class="container">
+			<div class="card">
+				<div class="card-body">
+					<div class="container text-center">
 
+					<img style=" width: 200px; height: 200px;"  class="profile_picture"  th:src="@{'/images/'+contact.png}" alt="Profile picture">
+					</div>
+
+					<h1 class="text-center text-secondary mt-3">Start Adding your contact on cloud..</h1>
+
+					<div class="text-center container d-grid gap-2">
+
+					<a href="" class=" btn btn-outline-primary btn-block text-uppercase m-3" type="button" th:href="@{/user/add-contact}">
+						Add new contact
+					</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	</body>
 </html>
