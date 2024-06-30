@@ -129,3 +129,30 @@ body {
 	padding: 10px;
 	display: none;
 }
+.active{
+	background: #009688 !important;
+	color: white !important;
+}
+#login {
+	margin-top: 50px;
+}
+#login-box {
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.text-info {
+	color: #17a2b8 !important;
+}
+.form-control {
+	border-radius: 0.25rem;
+}
+.btn-info {
+	background-color: #17a2b8;
+	border: none;
+}
+.btn-info:hover {
+	background-color: #138496;
+}

@@ -18,6 +18,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,9 @@ public class UserController {
 
 	@Autowired
 	private ContactRepository contactRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	//Method for adding common data to the model
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
@@ -129,7 +133,7 @@ public class UserController {
 		String userName = principal.getName();
 		User user = this.userRepository.getUserByUserName(userName);
 
-		int pageSize=6;
+		int pageSize=4;
 		// it have current page number and page size
 		Pageable pageable= PageRequest .of(page,pageSize);
 		Page<Contact> contact = this.contactRepository.findContactByUser(user.getId(),pageable);
@@ -249,6 +253,40 @@ public class UserController {
 
 
 		return "normal/profile";
+	}
+
+	//open Setting handler
+	@GetMapping("/setting")
+	public String settingHandler(Model model){
+		model.addAttribute("title", "Setting-Smart Contact Manager");
+
+		return "normal/settings";
+	}
+	@PostMapping("/change-password")
+	public String changePassword(@RequestParam("oldPassword") String oldPassword ,@RequestParam("newPassword") String newPassword,@RequestParam("confirmPassword") String confirmPassword, Principal principal, HttpSession session) {
+		String userName = principal.getName();
+		User currentUser = this.userRepository.getUserByUserName(userName);
+		if (this.bCryptPasswordEncoder.matches(oldPassword,currentUser.getPassword()))
+		{
+			System.out.println("old password is correct");
+			currentUser.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
+
+			this.userRepository.save(currentUser);
+			            session.setAttribute("message", new Message("Password Successfully Changed", "alert-success"));
+
+			if (newPassword != confirmPassword){
+				session.setAttribute("message", new Message("New Password and Confirm Password is not same", "alert-danger"));
+                return "redirect:/user/setting";
+			}else {
+				                session.setAttribute("message", new Message("Password Successfully Changed", "alert-success"));
+				return "redirect:/user/index";			}
+		}
+		else {
+			System.out.println("old password is not correct");
+			            session.setAttribute("message", new Message("Old Password is not correct", "alert-danger"));
+			return "redirect:/user/setting";
+		}
+
 	}
 
 }
