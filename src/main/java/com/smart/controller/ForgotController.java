@@ -19,7 +19,7 @@ public class ForgotController {
         return "forgot-password";
     }
     @PostMapping("/send-otp")
-    @ResponseBody
+
     public String otpProcess(@RequestParam("email") String email, Model model) {
         model.addAttribute("title","Forgot Password");
         //generate OTP of 4 digit
@@ -28,6 +28,6 @@ public class ForgotController {
 
         System.out.println("OTP"+otp);
         model.addAttribute("email", email);
-        return "OTP : "+otp;
+        return "verify-otp";
     }
 }
