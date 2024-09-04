@@ -69,7 +69,6 @@ public class UserController {
 	public String addContactForm(Model model ) {
 		model.addAttribute("title", "Add Contact-Smart Contact Manager");
 		model.addAttribute("contact", new Contact());
-
 		return "normal/add_contact_form";
 	}
 
@@ -77,7 +76,6 @@ public class UserController {
 	@PostMapping("/process-contact")
 	public String processContactForm(@ModelAttribute Contact contact , @RequestParam("contact_image") MultipartFile file, Principal principal, HttpSession session) {
 		try {
-
 
 			String name = principal.getName();
 			System.out.println("name is : " + name);

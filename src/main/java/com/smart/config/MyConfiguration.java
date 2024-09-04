@@ -81,7 +81,15 @@ public class MyConfiguration {
 			formLogin.usernameParameter("username");
 			formLogin.passwordParameter("password");
 		formLogin.permitAll();
-	});
+//            try {
+//                http.rememberMe(httpSecurityRememberMeConfigurer -> {
+//                    httpSecurityRememberMeConfigurer.key("rahuldora19000");
+//                    httpSecurityRememberMeConfigurer.tokenValiditySeconds(2 );
+//                });
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+        });
 
 
 
